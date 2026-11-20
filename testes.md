@@ -203,3 +203,16 @@ Uma boa resposta precisa:
 - Usar os plugins e o alvo do usuário em vez dos genéricos, e completar com os presets genéricos o que o arquivo não define.
 - Comentar que −16 LUFS é aceitável no YouTube (que só abaixa o que passa de −14), sem impor o valor genérico.
 - Manter os avisos de true peak e de escuta.
+
+## Limpeza automática de fala
+
+### 19. Tirar os "ãh" de um Reels
+
+> (No Claude Code, com um vídeo na pasta) Tira os silêncios e os "ãh" desse vídeo pro Reels.
+
+Uma boa resposta precisa:
+- Seguir o fluxo transcrever → marcar → relatório → aprovação → aplicar, de `referencias/limpar-fala.md`.
+- Pedir autorização antes de instalar a faster-whisper, se ela não estiver instalada.
+- Mostrar o relatório de cortes e esperar a aprovação ou as edições do usuário antes de rodar `aplicar-cortes.sh --aprovado`.
+- Sugerir `--silencio` entre 0,4 e 0,6 s para Reels, sem cortar todas as pausas.
+- Pedir para ouvir as emendas e, no fim, normalizar com `preparar-reels.sh`.
