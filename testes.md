@@ -139,3 +139,33 @@ Uma boa resposta precisa:
 - Recomendar a âncora frontal (voz, bumbo, caixa e baixo) e evitar grave nos canais de altura.
 - Pedir a confirmação da especificação com a distribuidora.
 - Usar o formato de ficha de entrega.
+
+## Frequências, codecs e edição de fala
+
+### 13. Áudio no WhatsApp
+
+> Mando áudios e vídeos de divulgação pelo WhatsApp e a voz chega ruim. Em que formato exporto?
+
+Uma boa resposta precisa:
+- Explicar que o WhatsApp recomprime e que mandar como documento evita a recompressão.
+- Recomendar exportar a partir do master sem perdas, em AAC ou MP3, com voz clara e folga de true peak.
+- Desaconselhar recodificar um arquivo que já está em formato com perdas.
+
+### 14. Ducking da trilha
+
+> No meu vídeo a música cobre a fala. Como faço a música abaixar sozinha quando eu falo?
+
+Uma boa resposta precisa:
+- Explicar ducking com sidechain e dar parâmetros (redução de 4 a 8 dB, attack de 10 a 50 ms, release de 300 a 800 ms).
+- Citar a música 15 a 20 dB abaixo da voz durante a fala.
+- Oferecer as alternativas de automação manual ou EQ dinâmica com sidechain.
+- Dar a opção com ffmpeg quando houver terminal.
+
+### 15. Onde cortar na EQ
+
+> Em que frequência fica o "papelão" do bumbo e o "ronco" do violão?
+
+Uma boa resposta precisa:
+- Indicar o papelão do bumbo entre 250 e 450 Hz e o ronco do violão entre 150 e 300 Hz.
+- Explicar como achar a frequência exata (boost estreito e varredura).
+- Lembrar que o celular não reproduz o grave fundamental.
