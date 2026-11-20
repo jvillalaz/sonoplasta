@@ -44,6 +44,7 @@ Leia o arquivo do assunto antes de responder sobre ele:
 - Atmos e imersivo → `referencias/atmos.md`
 - Masterização, CD/vinil → `referencias/masterizacao.md`
 - Medição e checagem → `referencias/medicao.md`
+- Entregas e especificações → `referencias/entregas.md`
 
 ## Formato das respostas
 
