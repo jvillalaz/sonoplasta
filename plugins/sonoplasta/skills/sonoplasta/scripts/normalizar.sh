@@ -62,9 +62,21 @@ fi
 
 [ -e "$saida" ] && echo "Aviso: $saida já existe e será sobrescrito."
 echo "Normalizando para ${alvo} LUFS com true peak máximo de ${tp} dBTP (duas passadas)..."
-# shellcheck disable=SC2086
-resultado="$(loudnorm_duas_passadas "$entrada" "$saida" "$alvo" "$tp" $codec)"
-read -r tipo in_i in_tp in_lra _ <<<"$resultado"
+# O limitador do loudnorm e a codificação com perdas podem deixar o true peak um pouco acima
+# do pedido. Se isso acontecer, refaz com um teto interno mais baixo (até duas vezes).
+tp_interno="$tp"
+for tentativa in 1 2 3; do
+  # shellcheck disable=SC2086
+  resultado="$(loudnorm_duas_passadas "$entrada" "$saida" "$alvo" "$tp_interno" $codec)"
+  read -r tipo in_i in_tp in_lra _ <<<"$resultado"
+  read -r _ _ tp_out <<<"$(medir_ebur128 "$saida")"
+  excesso="$(calc "$tp_out - ($tp)")"
+  if awk -v e="$excesso" 'BEGIN { exit !(e <= 0) }' || [ "$tentativa" = 3 ]; then
+    break
+  fi
+  tp_interno="$(calc "$tp_interno - $excesso - 0.2")"
+  echo "  O true peak passou do máximo em ${excesso} dB. Refazendo com teto interno de ${tp_interno} dBTP..."
+done
 
 echo
 echo "ANTES"
@@ -75,3 +87,6 @@ echo
 echo "Arquivo gerado: $saida"
 
 explicar_modo "$tipo" "$in_i" "$in_tp" "$in_lra" "$alvo" "$tp"
+if awk -v e="$excesso" 'BEGIN { exit !(e > 0) }'; then
+  echo "Atenção: o true peak final (${tp_out} dBTP) ficou acima de ${tp} dBTP. Controle os picos na mix ou no master e rode de novo."
+fi
