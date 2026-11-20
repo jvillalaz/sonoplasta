@@ -1,0 +1,26 @@
+{
+ "arquivo": "exemplo.mp4",
+ "duracao": 10.0,
+ "idioma": "pt",
+ "modelo": "manual",
+ "texto": "Olá, pessoal. Ãh, hoje o o microfone é muito, muito bom. Então, o tipo de cabo importa.",
+ "palavras": [
+  {"inicio": 1.20, "fim": 1.50, "palavra": "Olá,", "prob": 0.99},
+  {"inicio": 1.55, "fim": 2.00, "palavra": "pessoal.", "prob": 0.99},
+  {"inicio": 2.40, "fim": 2.70, "palavra": "Ãh,", "prob": 0.80},
+  {"inicio": 2.80, "fim": 3.10, "palavra": "hoje", "prob": 0.99},
+  {"inicio": 3.15, "fim": 3.25, "palavra": "o", "prob": 0.90},
+  {"inicio": 3.35, "fim": 3.45, "palavra": "o", "prob": 0.95},
+  {"inicio": 3.50, "fim": 4.10, "palavra": "microfone", "prob": 0.99},
+  {"inicio": 4.15, "fim": 4.25, "palavra": "é", "prob": 0.98},
+  {"inicio": 4.30, "fim": 4.60, "palavra": "muito,", "prob": 0.99},
+  {"inicio": 4.65, "fim": 4.95, "palavra": "muito", "prob": 0.99},
+  {"inicio": 5.00, "fim": 5.30, "palavra": "bom.", "prob": 0.99},
+  {"inicio": 6.50, "fim": 6.80, "palavra": "Então,", "prob": 0.97},
+  {"inicio": 6.85, "fim": 6.95, "palavra": "o", "prob": 0.99},
+  {"inicio": 7.00, "fim": 7.30, "palavra": "tipo", "prob": 0.99},
+  {"inicio": 7.35, "fim": 7.45, "palavra": "de", "prob": 0.99},
+  {"inicio": 7.50, "fim": 7.90, "palavra": "cabo", "prob": 0.99},
+  {"inicio": 7.95, "fim": 8.50, "palavra": "importa.", "prob": 0.99}
+ ]
+}

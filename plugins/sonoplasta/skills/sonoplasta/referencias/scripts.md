@@ -110,6 +110,10 @@ A medição não substitui a escuta: confirme sempre ouvindo em mono e no celula
 
 Depois de rodar, ainda vale o checklist pré-publicação de `referencias/instagram-criadores.md`: escuta no celular, legenda e direitos da música.
 
+## limpar-fala/
+
+`transcrever.py`, `marcar-cortes.py` e `aplicar-cortes.sh` cortam silêncios, vícios e repetições de vídeos falados, com aprovação obrigatória do usuário antes de aplicar. Requisitos, fluxo e ajustes em `referencias/limpar-fala.md`.
+
 ## Testes
 
-`bash scripts/testes/rodar-testes.sh` gera sinais de teste em `scripts/testes/saida/` (tom de 1 kHz, ruído rosa, estéreo fora de fase, estéreo idêntico, vídeo curto, vídeo vertical para Reels, arquivo clipado, arquivo com silêncio no meio, vídeo com áudio em 44,1 kHz e estéreo com um canal vazio) e confere todos os scripts. A pasta `saida/` não vai para o git nem para o ZIP.
+`bash scripts/testes/rodar-testes.sh` gera sinais de teste em `scripts/testes/saida/` (tom de 1 kHz, ruído rosa, estéreo fora de fase, estéreo idêntico, vídeo curto, vídeo vertical para Reels, arquivo clipado, arquivo com silêncio no meio, vídeo com áudio em 44,1 kHz e estéreo com um canal vazio) e confere todos os scripts. A limpeza de fala é testada com uma transcrição de exemplo (`testes/transcricao-exemplo.json`) e uma lista de cortes (`testes/cortes-exemplo.json`), sem precisar da faster-whisper; se não houver Python, o teste do `marcar-cortes.py` é pulado. A pasta `saida/` não vai para o git nem para o ZIP.

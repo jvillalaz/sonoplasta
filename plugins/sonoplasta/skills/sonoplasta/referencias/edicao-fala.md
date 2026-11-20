@@ -45,7 +45,7 @@ ffmpeg -hide_banner -nostats -i entrada.wav -af silencedetect=noise=-45dB:d=0.6 
 ```
 
 - **Ruído do limiar:** ajuste `noise` ao ruído de fundo. Comece 10 a 15 dB acima do room tone medido (de −50 a −35 dB).
-- **Corte automático:** remover os silêncios automaticamente (`silenceremove`) é rápido, mas não diferencia pausa de intenção. Prefira listar, revisar e cortar com aprovação.
+- **Corte automático:** remover os silêncios automaticamente (`silenceremove`) é rápido, mas não diferencia pausa de intenção. Prefira listar, revisar e cortar com aprovação: é o que faz o fluxo de `referencias/limpar-fala.md`.
 
 ## Emendas
 

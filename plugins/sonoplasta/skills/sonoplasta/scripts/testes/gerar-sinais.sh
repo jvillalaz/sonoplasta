@@ -39,3 +39,7 @@ gerar video-44k.mp4       -f lavfi -i "testsrc=duration=4:size=320x240:rate=25" 
                           -f lavfi -i "sine=frequency=500:duration=4:sample_rate=44100" \
                           -shortest -c:v libx264 -pix_fmt yuv420p -c:a aac
 gerar canal-vazio.wav     -f lavfi -i "aevalsrc=0|0.5*sin(2*PI*440*t):d=4"
+gerar fala-video.mp4      -f lavfi -i "testsrc=duration=10:size=320x240:rate=30" \
+                          -f lavfi -i "sine=frequency=440:duration=10:sample_rate=48000" \
+                          -shortest -c:v libx264 -pix_fmt yuv420p -c:a aac
+gerar fala-tom.wav        -f lavfi -i "sine=frequency=440:duration=10:sample_rate=48000"

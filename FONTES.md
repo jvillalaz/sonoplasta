@@ -299,3 +299,13 @@ Nenhum código das fontes foi copiado nesta fase. A checagem de consistência de
 | `SKILL.md`, `modelos/sonoplasta-presets.md` | Presets do usuário que substituem só os campos definidos, procurados apenas na pasta de trabalho (não na pasta pessoal, como na fonte) | bitwize (CC0), ideia |
 
 Nenhum texto das fontes foi copiado nesta fase; tudo foi reescrito em português.
+
+### Fase 11 (versão 1.9.0)
+
+| Arquivo | O que entrou | Fonte |
+|---|---|---|
+| `scripts/limpar-fala/` | Fluxo transcrever → classificar → aplicar, com prévia que não altera nada (aqui, `--aprovado` obrigatório para gravar) | audioeditor (MIT), ideia |
+| `scripts/limpar-fala/marcar-cortes.py` | Categorias de corte: vícios só quando isolados, gaguejada ("o o") separada de repetição enfática ("muito, muito"), silêncios longos | audioeditor (MIT), ideia |
+| `scripts/limpar-fala/aplicar-cortes.sh` | Fade com curva `qsin` em cada emenda (aqui, 10 ms por padrão, ajustável até 40 ms) | audioeditor (MIT), ideia |
+
+Nenhum código das fontes foi copiado: a fonte é TypeScript e usa `insanely-fast-whisper` e um LLM externo; aqui a transcrição é local (faster-whisper) e a marcação é por regras editáveis. A detecção de "retomada" (a mesma ideia dita de novo depois de uma pausa) ficou para uma versão futura.
