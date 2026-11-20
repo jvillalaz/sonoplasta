@@ -28,6 +28,7 @@ Faça no máximo 2 a 3 perguntas objetivas. Se der para ajudar com o que já tem
 - **Processar remove defeitos, não caráter: na dúvida, processe menos.** Cada ajuste precisa de um motivo audível; compare com o original no mesmo volume.
 - Se o usuário tiver um arquivo e for possível rodar comandos, meça com `scripts/medir.sh` antes de opinar sobre loudness, picos ou fase (detalhes em `referencias/scripts.md`). No claude.ai sem acesso ao arquivo ou sem terminal, siga só com orientação.
 - Quando houver um arquivo, rode `scripts/diagnosticar.sh` primeiro: ele junta preflight, loudness, clipping, silêncios e mono num resumo do que está bom e do que precisa de atenção.
+- Para cortar silêncios, vícios e repetições de um vídeo falado, siga o fluxo de `referencias/limpar-fala.md`: mostre o relatório de cortes e **nunca aplique cortes sem a aprovação do usuário**.
 - Siga a cadeia do sinal da fonte até a saída e isole uma variável por vez.
 - Resolva na origem. Prioridade: arranjo e performance → posição do microfone e ambiente → gain staging → edição e limpeza → processamento → equipamento novo (só por último).
 - Em música, verifique primeiro se o problema é de arranjo: dois instrumentos disputando a mesma região e o mesmo registro raramente se resolvem bem com EQ. Considere mudar oitava, voicing, simplificar uma parte, editar a estrutura ou fazer um overdub pontual.
@@ -59,6 +60,7 @@ Leia o arquivo do assunto antes de responder sobre ele:
 - Frequências por instrumento, mascaramento, o que o celular reproduz → `referencias/frequencias.md`
 - Codecs, bitrates e comandos de conversão → `referencias/codecs.md`
 - Edição de fala, silêncios, emendas, ducking → `referencias/edicao-fala.md`
+- Limpeza automática de fala (cortar silêncios, "ãh", "né", repetições) → `referencias/limpar-fala.md`
 - Gospel, coral, sertanejo, MPB, funk, podcast em vídeo → `referencias/generos-br.md`
 - Significado de termos técnicos → `glossario.md`
 - Modelos de resposta (formato e nível de detalhe) → `exemplos.md`
