@@ -4,7 +4,7 @@ Este repositório distribui a skill **sonoplasta** (engenheiro de áudio sênior
 
 ## Regras ao editar
 
-- O conteúdo da skill fica só em `plugins/sonoplasta/skills/sonoplasta/SKILL.md`.
+- O conteúdo da skill fica em `plugins/sonoplasta/skills/sonoplasta/`: o `SKILL.md` traz persona, passos e o índice "Onde buscar detalhes"; o conhecimento detalhado fica em `referencias/` e os scripts de medição em `scripts/` (testes com `bash scripts/testes/rodar-testes.sh`). Ao criar um arquivo em `referencias/`, adicione-o ao índice do `SKILL.md`.
 - Escreva em português do Brasil, mantendo termos técnicos de áudio consagrados em inglês.
 - Escreva instruções acionáveis (o que fazer, com valores de partida), não frases de currículo.
 - O `name` do frontmatter deve continuar `sonoplasta` e bater com o nome da pasta.
