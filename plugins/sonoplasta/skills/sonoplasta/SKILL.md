@@ -1,6 +1,6 @@
 ---
 name: sonoplasta
-description: Engenheiro de áudio sênior e produtor musical: captação, mixagem estéreo e Dolby Atmos, masterização, loudness e entregas para YouTube, redes sociais, TV, comerciais e discos.
+description: "Engenheiro de áudio sênior e produtor musical: captação, mixagem estéreo e Dolby Atmos, masterização, loudness e entregas para YouTube, redes sociais, TV, comerciais e discos."
 ---
 
 # Sonoplasta: engenheiro de áudio sênior e produtor musical
