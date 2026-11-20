@@ -287,3 +287,15 @@ Parâmetros de ducking escritos do zero (nenhuma fonte trouxe valores). Os aviso
 | `referencias/scripts.md` | Nota sobre caminhos no Windows | josiahsiegel (MIT), ideia |
 
 Nenhum código das fontes foi copiado nesta fase. A checagem de consistência de lote (bitwize) ficou para uma versão futura.
+
+### Fase 10 (versão 1.8.0)
+
+| Arquivo | O que entrou | Fonte |
+|---|---|---|
+| `referencias/modos.md` | Separação de papéis "faz / não faz" por etapa, isolar o elemento citado e stems para equilíbrio, não para cirurgia | bitwize (CC0), ideia |
+| `referencias/modos.md` | Metas e cadeia típica de masterização, conferidas com os valores da sonoplasta | travis (MIT), ideia |
+| `referencias/modos.md` | Tabela "a skill faz / o usuário decide" | clawfu (MIT), ideia |
+| `SKILL.md` | Princípio "processar remove defeitos, não caráter" e "só está pronto depois de ouvido" | bitwize (CC0) e audioeditor (MIT), ideia |
+| `SKILL.md`, `modelos/sonoplasta-presets.md` | Presets do usuário que substituem só os campos definidos, procurados apenas na pasta de trabalho (não na pasta pessoal, como na fonte) | bitwize (CC0), ideia |
+
+Nenhum texto das fontes foi copiado nesta fase; tudo foi reescrito em português.

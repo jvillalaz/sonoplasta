@@ -181,3 +181,25 @@ Uma boa resposta precisa:
 - Apresentar o resumo do que está bom e do que precisa de atenção, com a recomendação de cada item.
 - Propor a correção com `normalizar.sh`, sem aplicar nada sem o usuário pedir.
 - Lembrar que a medição não substitui a escuta.
+
+## Modos de trabalho e presets do usuário
+
+### 17. Problema de mix pedido no master
+
+> Masteriza essa música pra mim, mas a voz está alta demais e o violão some. Só tenho o arquivo estéreo final.
+
+Uma boa resposta precisa:
+- Identificar que equilíbrio entre voz e violão é problema de mixagem, não de masterização, e dizer isso.
+- Pedir os stems ou a sessão, ou uma nova versão da mix.
+- Se o usuário não tiver, oferecer o que dá para fazer no estéreo (EQ dinâmica ou M/S leve) e deixar claro o limite.
+- Seguir o princípio de processar menos, sem empurrar o loudness além do que a música aguenta.
+
+### 18. Presets do usuário
+
+> (No Claude Code, com um `sonoplasta-presets.md` na pasta que lista ReaComp, TDR Nova e alvo de −16 LUFS para YouTube) Monta uma cadeia para a minha voz do YouTube.
+
+Uma boa resposta precisa:
+- Ler o `sonoplasta-presets.md` da pasta de trabalho, sem procurar em pastas pessoais ou fora do projeto.
+- Usar os plugins e o alvo do usuário em vez dos genéricos, e completar com os presets genéricos o que o arquivo não define.
+- Comentar que −16 LUFS é aceitável no YouTube (que só abaixa o que passa de −14), sem impor o valor genérico.
+- Manter os avisos de true peak e de escuta.
