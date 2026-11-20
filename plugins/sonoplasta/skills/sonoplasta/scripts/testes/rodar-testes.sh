@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Gera os sinais de teste e confere o comportamento de medir.sh, normalizar.sh e checar-mono.sh.
+# Gera os sinais de teste e confere o comportamento de todos os scripts.
 # Uso: rodar-testes.sh
 set -uo pipefail
 
@@ -87,6 +87,41 @@ diag_sil="$("$SCRIPTS/diagnosticar.sh" "$SAIDA/com-silencio.wav")"
 espera "com-silencio.wav lista o silêncio com início e fim" "de 3.00 s a 6.00 s" "$diag_sil"
 espera "fora-de-fase.wav aponta problema na soma mono" "Problema de fase" "$("$SCRIPTS/diagnosticar.sh" "$SAIDA/fora-de-fase.wav")"
 espera "alvo fora de ±1 LU é apontado" "fora do alvo de -16 LUFS" "$("$SCRIPTS/diagnosticar.sh" "$SAIDA/com-silencio.wav" --alvo -16)"
+
+echo
+echo "limpar-fala"
+LF="$SCRIPTS/limpar-fala"
+# Python que funcione de verdade (no Windows, "python3" pode ser só o atalho da Microsoft Store).
+PY=""
+if python3 -c 'import sys' >/dev/null 2>&1; then PY="python3"; elif py -3 -c 'import sys' >/dev/null 2>&1; then PY="py -3"; fi
+if [ -n "$PY" ]; then
+  rel="$($PY "$LF/marcar-cortes.py" "$DIR/transcricao-exemplo.json" --saida "$SAIDA/marcados.cortes.json")"
+  espera "marcar-cortes propõe 5 cortes" "Total: 5 corte(s)" "$rel"
+  espera "silêncio no início marcado" "silêncio no início" "$rel"
+  espera "vício \"ãh\" marcado" 'vício: "ãh"' "$rel"
+  espera "\"então\" isolado marcado" 'vício: "então"' "$rel"
+  espera "repetição acidental \"o o\" marcada" 'repetição: "o"' "$rel"
+  nao_espera "repetição enfática \"muito, muito\" mantida" 'repetição: "muito"' "$rel"
+  nao_espera "\"tipo\" dentro da frase mantido" 'vício: "tipo"' "$rel"
+  nao_espera "\"é\" verbo mantido" 'vício: "é"' "$rel"
+else
+  echo "  (pulado: Python 3 não encontrado; marcar-cortes.py não foi testado)"
+fi
+
+rm -f "$SAIDA/fala-video_limpo.mp4"
+sem_aprovacao="$("$LF/aplicar-cortes.sh" "$SAIDA/fala-video.mp4" "$DIR/cortes-exemplo.json" 2>&1)"; cod=$?
+[ "$cod" = 3 ] && [ ! -e "$SAIDA/fala-video_limpo.mp4" ] && ok "sem --aprovado nada é gravado" || falha "sem --aprovado: código $cod"
+saida_cortes="$("$LF/aplicar-cortes.sh" "$SAIDA/fala-video.mp4" "$DIR/cortes-exemplo.json" --aprovado 2>&1)"
+espera "vídeo cortado com imagem e som sincronizados" "(ok)." "$saida_cortes"
+dur="$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$SAIDA/fala-video_limpo.mp4" | tr -d '')"
+awk -v d="$dur" 'BEGIN { exit !(d > 5.22 && d < 5.32) }' && ok "duração final $dur s (esperado ~5,27 s)" || falha "duração final $dur s (esperado ~5,27 s)"
+sed 's/"id": 5, "aplicar": true/"id": 5, "aplicar": false/' "$DIR/cortes-exemplo.json" > "$SAIDA/cortes-sem-5.json"
+"$LF/aplicar-cortes.sh" "$SAIDA/fala-tom.wav" "$SAIDA/cortes-sem-5.json" --aprovado --saida "$SAIDA/fala-tom_limpo.wav" >/dev/null 2>&1
+dur="$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$SAIDA/fala-tom_limpo.wav" | tr -d '')"
+awk -v d="$dur" 'BEGIN { exit !(d > 6.68 && d < 6.76) }' && ok "corte com \"aplicar\": false ignorado ($dur s)" || falha "\"aplicar\": false: duração $dur s (esperado ~6,73 s)"
+# Estalo nas emendas aparece como energia acima de 3 kHz num seno de 440 Hz.
+pico_agudo="$(ffmpeg -hide_banner -nostats -i "$SAIDA/fala-tom_limpo.wav" -af highpass=f=3000:poles=2,highpass=f=3000:poles=2,astats=measure_overall=Peak_level:measure_perchannel=none -f null - 2>&1 | tr -d '' | awk '/Peak level dB:/ { print $NF }')"
+awk -v p="$pico_agudo" 'BEGIN { exit !(p < -60) }' && ok "emendas sem estalo (pico acima de 3 kHz: $pico_agudo dB)" || falha "estalo nas emendas (pico acima de 3 kHz: $pico_agudo dB)"
 
 echo
 if [ "$falhas" -eq 0 ]; then

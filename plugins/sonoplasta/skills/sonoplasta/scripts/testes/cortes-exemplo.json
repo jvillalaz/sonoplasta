@@ -1,0 +1,12 @@
+{
+ "arquivo": "exemplo.mp4",
+ "duracao": 10.0,
+ "parametros": {"silencio": 0.6, "respiro": 0.15},
+ "cortes": [
+ {"id": 1, "aplicar": true, "inicio": 0.0, "fim": 1.125, "motivo": "silêncio no início", "texto": ""},
+ {"id": 2, "aplicar": true, "inicio": 2.075, "fim": 2.725, "motivo": "vício: \"ãh\" + silêncio de 0,80 s", "texto": "...Olá, pessoal. [Ãh,] hoje o o..."},
+ {"id": 3, "aplicar": true, "inicio": 3.15, "fim": 3.25, "motivo": "repetição: \"o\"", "texto": "...pessoal. Ãh, hoje [o] o microfone é..."},
+ {"id": 4, "aplicar": true, "inicio": 5.375, "fim": 6.775, "motivo": "vício: \"então\" + silêncio de 1,55 s", "texto": "...muito, muito bom. [Então,] o tipo de..."},
+ {"id": 5, "aplicar": true, "inicio": 8.575, "fim": 10.0, "motivo": "silêncio no fim", "texto": ""}
+ ]
+}
