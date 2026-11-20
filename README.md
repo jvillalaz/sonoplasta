@@ -22,12 +22,15 @@ Depois disso, a skill entra sozinha quando o assunto for áudio. Também dá par
 ## Estrutura
 
 ```
-.claude-plugin/marketplace.json           catálogo (permite /plugin marketplace add)
-plugins/sonoplasta/.claude-plugin/plugin.json
-plugins/sonoplasta/skills/sonoplasta/SKILL.md          persona, passos e índice da skill
-plugins/sonoplasta/skills/sonoplasta/referencias/     conhecimento detalhado por assunto
-plugins/sonoplasta/skills/sonoplasta/scripts/        medição, normalização, checagem mono e Reels (ffmpeg)
-scripts/empacotar.sh                      gera o ZIP para o claude.ai
+.claude-plugin/marketplace.json                     catálogo (permite /plugin marketplace add)
+plugins/sonoplasta/.claude-plugin/plugin.json       manifesto e versão do plugin
+plugins/sonoplasta/skills/sonoplasta/SKILL.md       persona, passos e índice da skill
+plugins/sonoplasta/skills/sonoplasta/referencias/   conhecimento detalhado por assunto
+plugins/sonoplasta/skills/sonoplasta/scripts/       medição, normalização, checagem mono e Reels (ffmpeg)
+plugins/sonoplasta/skills/sonoplasta/glossario.md   termos técnicos
+plugins/sonoplasta/skills/sonoplasta/exemplos.md    modelos de resposta
+testes.md                                           perguntas para revisar a skill antes de cada versão
+scripts/empacotar.sh                                gera o ZIP para o claude.ai
 ```
 
 ## Editar
