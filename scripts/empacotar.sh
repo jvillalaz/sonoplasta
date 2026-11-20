@@ -6,5 +6,5 @@ raiz="$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p "$raiz/dist"
 rm -f "$raiz/dist/sonoplasta.zip"
 cd "$raiz/plugins/sonoplasta/skills"
-zip -qr "$raiz/dist/sonoplasta.zip" sonoplasta
+zip -qr "$raiz/dist/sonoplasta.zip" sonoplasta -x "sonoplasta/scripts/testes/saida/*"
 echo "Gerado: dist/sonoplasta.zip"
