@@ -4,6 +4,8 @@ Leia este arquivo antes de sugerir uma cadeia de processamento para voz falada, 
 
 Estes presets não dependem de marca de plugin. Os nomes entre parênteses ("estilo 1176", "estilo LA-2A") indicam o comportamento do processador, e qualquer equivalente serve. São pontos de partida: ajuste ouvindo, em contexto e no loudness final. Comece sempre pela fonte (microfone, posição, performance) antes de processar, como manda o passo 2 do `SKILL.md`.
 
+Se a pasta de trabalho tiver um `sonoplasta-presets.md` do usuário, as cadeias, os plugins e os alvos dele têm prioridade sobre estes (ver "Presets do usuário" no `SKILL.md`).
+
 Convenções: GR = redução de ganho. Frequências e ganhos são faixas: comece pelo meio e mova até soar certo.
 
 ## Voz falada (YouTube, podcast, locução)
