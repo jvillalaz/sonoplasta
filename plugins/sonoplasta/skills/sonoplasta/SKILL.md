@@ -20,8 +20,12 @@ Antes de recomendar qualquer coisa, descubra (pela conversa ou perguntando):
 
 Faça no máximo 2 a 3 perguntas objetivas. Se der para ajudar com o que já tem, ajude primeiro e diga o que assumiu.
 
+**Presets do usuário:** se houver acesso a arquivos, procure `sonoplasta-presets.md` apenas na pasta de trabalho (a raiz do projeto aberto). Não procure em pastas pessoais ocultas nem em outros locais do computador. Se o arquivo existir, leia-o e dê prioridade às cadeias, aos plugins e aos alvos dele sobre os presets genéricos; o que ele não definir continua vindo de `referencias/presets.md`. Os cuidados de segurança e as especificações oficiais valem sempre: se um alvo do usuário ficar fora da especificação do destino, avise antes de seguir. No claude.ai, use o conteúdo se o usuário colar o arquivo na conversa. Para criar um, ofereça o modelo `modelos/sonoplasta-presets.md`.
+
 ## Passo 2: diagnosticar ou planejar
 
+- Identifique o modo do pedido: captação, edição e limpeza, mixagem, masterização ou entrega (o que cada um faz e não faz está em `referencias/modos.md`). Se o problema pertencer a uma etapa anterior, diga isso e indique onde resolver.
+- **Processar remove defeitos, não caráter: na dúvida, processe menos.** Cada ajuste precisa de um motivo audível; compare com o original no mesmo volume.
 - Se o usuário tiver um arquivo e for possível rodar comandos, meça com `scripts/medir.sh` antes de opinar sobre loudness, picos ou fase (detalhes em `referencias/scripts.md`). No claude.ai sem acesso ao arquivo ou sem terminal, siga só com orientação.
 - Quando houver um arquivo, rode `scripts/diagnosticar.sh` primeiro: ele junta preflight, loudness, clipping, silêncios e mono num resumo do que está bom e do que precisa de atenção.
 - Siga a cadeia do sinal da fonte até a saída e isole uma variável por vez.
@@ -39,6 +43,7 @@ Dê pontos de partida numéricos (frequências, Q, ratio, attack/release, thresh
 
 Leia o arquivo do assunto antes de responder sobre ele:
 
+- Modos de trabalho (o que cada etapa faz e não faz) → `referencias/modos.md`
 - Vídeo, YouTube, redes, diálogo → `referencias/video-redes.md`
 - Instagram, Reels, TikTok, Shorts e criadores de conteúdo → `referencias/instagram-criadores.md`
 - TV, rádio, comerciais → `referencias/broadcast.md`
@@ -49,7 +54,7 @@ Leia o arquivo do assunto antes de responder sobre ele:
 - Medição e checagem → `referencias/medicao.md`
 - Entregas e especificações → `referencias/entregas.md`
 - Scripts de diagnóstico, medição e normalização → `referencias/scripts.md`
-- Presets por fonte (voz, violão, bateria, baixo) → `referencias/presets.md`
+- Presets por fonte (voz, violão, bateria, baixo) → `referencias/presets.md` (os do usuário, se houver, têm prioridade)
 - Diagnóstico de problemas (troubleshooting) → `referencias/troubleshooting.md`
 - Frequências por instrumento, mascaramento, o que o celular reproduz → `referencias/frequencias.md`
 - Codecs, bitrates e comandos de conversão → `referencias/codecs.md`
