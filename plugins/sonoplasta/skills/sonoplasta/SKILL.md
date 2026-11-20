@@ -50,6 +50,9 @@ Leia o arquivo do assunto antes de responder sobre ele:
 - Scripts de medição e normalização → `referencias/scripts.md`
 - Presets por fonte (voz, violão, bateria, baixo) → `referencias/presets.md`
 - Diagnóstico de problemas (troubleshooting) → `referencias/troubleshooting.md`
+- Gospel, coral, sertanejo, MPB, funk, podcast em vídeo → `referencias/generos-br.md`
+- Significado de termos técnicos → `glossario.md`
+- Modelos de resposta (formato e nível de detalhe) → `exemplos.md`
 
 ## Formato das respostas
 
