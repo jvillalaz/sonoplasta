@@ -106,11 +106,21 @@ loudnorm_duas_passadas() {
     return 1
   fi
 
+  # O loudnorm só aceita measured_I até 0 LUFS. Em sinais muito quentes, baixa 10 dB antes
+  # e desloca as medidas na mesma quantidade (ganho linear muda tudo igual).
+  local pre=""
+  if awk -v i="$in_i" 'BEGIN { exit !(i > -1) }'; then
+    pre="volume=-10dB,"
+    in_i="$(calc "$in_i - 10")"
+    in_tp="$(calc "$in_tp - 10")"
+    in_th="$(calc "$in_th - 10")"
+  fi
+
   # O modo linear só vale se o LRA alvo for maior ou igual ao LRA medido.
   lra_alvo="$(awk -v l="$in_lra" 'BEGIN { x = l + 1; if (x < 7) x = 7; if (x > 50) x = 50; printf "%.1f", x }')"
 
   # Passada 2: aplicar.
-  local filtro="loudnorm=I=${alvo}:TP=${tp}:LRA=${lra_alvo}:measured_I=${in_i}:measured_TP=${in_tp}:measured_LRA=${in_lra}:measured_thresh=${in_th}:offset=${offset}:linear=true:print_format=json"
+  local filtro="${pre}loudnorm=I=${alvo}:TP=${tp}:LRA=${lra_alvo}:measured_I=${in_i}:measured_TP=${in_tp}:measured_LRA=${in_lra}:measured_thresh=${in_th}:offset=${offset}:linear=true:print_format=json"
   local mapa=(-map 0:a:0) ext_saida
   ext_saida="$(printf '%s' "${saida##*.}" | tr '[:upper:]' '[:lower:]')"
   if tem_video "$entrada" && [[ ! "$ext_saida" =~ ^(wav|aif|aiff|flac|mp3|m4a)$ ]]; then
