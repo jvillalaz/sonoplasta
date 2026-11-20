@@ -262,3 +262,17 @@ Conflitos entre fontes e a sonoplasta, para a regra da Fase 8 ("se houver confli
 | Ruído entre falas | gate em −40 dB (clawfu) | Expander suave (3 a 6 dB) |
 | Loudness de CD | −9 a −12 LUFS (travis) | Sem alvo de norma |
 | Crossfade nas emendas | 40 ms qsin (audioeditor) | Microfades de 5 a 20 ms (`instagram-criadores.md`); a Fase 11 testa |
+
+## Itens aproveitados
+
+### Fase 8 (versão 1.6.0)
+
+| Arquivo | O que entrou | Fonte |
+|---|---|---|
+| `referencias/frequencias.md` | Faixas de fundamental por instrumento, guia de regiões do espectro e problemas por faixa (traduzidos, reescritos e ampliados com voz infantil, coral e metais) | patterns (Apache-2.0) |
+| `referencias/codecs.md` | Tabela de codecs e encoders do ffmpeg, taxas recomendadas por uso, comandos de conversão | josiahsiegel (MIT), claude-video (MIT) |
+| `referencias/edicao-fala.md` | Categorias de corte (vício isolado, repetição acidental × enfática, retomada), alerta sobre gates e degraus reintroduzidos pelo AAC, "conferir ouvindo" | audioeditor (MIT) |
+| `referencias/edicao-fala.md` | `silencedetect`, `afftdn`, `anlmdn` | claude-video (MIT) |
+| `referencias/entregas.md` | Níveis Loud/Normal/Quiet do Spotify (−11/−14/−19 LUFS), conferidos na página oficial do Spotify for Artists em 2026-11-19 | claude-video (pista); Spotify (fonte oficial) |
+
+Parâmetros de ducking escritos do zero (nenhuma fonte trouxe valores). Os avisos de licença foram copiados para `plugins/sonoplasta/skills/sonoplasta/LICENCAS-TERCEIROS.md`, que vai junto no ZIP e no plugin.
