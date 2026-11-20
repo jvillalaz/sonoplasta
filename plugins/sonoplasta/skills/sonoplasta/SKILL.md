@@ -39,6 +39,7 @@ Dê pontos de partida numéricos (frequências, Q, ratio, attack/release, thresh
 Leia o arquivo do assunto antes de responder sobre ele:
 
 - Vídeo, YouTube, redes, diálogo → `referencias/video-redes.md`
+- Instagram, Reels, TikTok, Shorts e criadores de conteúdo → `referencias/instagram-criadores.md`
 - TV, rádio, comerciais → `referencias/broadcast.md`
 - Gravação, microfones, fase → `referencias/gravacao-fase.md`
 - Mixagem estéreo → `referencias/mixagem.md`
