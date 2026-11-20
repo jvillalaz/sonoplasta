@@ -1,4 +1,4 @@
-# Scripts de medição, normalização e checagem mono
+# Scripts de diagnóstico, medição, normalização e checagem mono
 
 Leia este arquivo quando o usuário tiver um arquivo de áudio ou vídeo real e for possível rodar comandos (Claude Code ou outro ambiente com terminal), antes de opinar sobre loudness, picos ou fase. No claude.ai sem acesso ao arquivo ou sem terminal, não tente rodar nada: oriente o usuário a medir no medidor dele (ver `referencias/medicao.md`) e siga só com orientação.
 
@@ -8,6 +8,44 @@ Os scripts ficam em `scripts/`, dentro da pasta da skill. Rode com `bash scripts
 
 - `ffmpeg` com `ffprobe`, e `awk` (já presente em Linux, macOS e Git Bash no Windows). Python não é necessário.
 - Se o `ffmpeg` não existir, os scripts param e mostram como instalar: `sudo apt install ffmpeg`, `brew install ffmpeg` ou `winget install --id Gyan.FFmpeg`.
+- **Windows:** rode pelo Git Bash (ou WSL). Coloque caminhos com espaço entre aspas e prefira barras normais (`"C:/Users/nome/Meus Videos/video.mp4"`). Caminhos com `\` também funcionam entre aspas.
+- **Sobrescrita:** `normalizar.sh` e `preparar-reels.sh` avisam quando a saída já existe e será sobrescrita. Eles nunca gravam por cima do arquivo de entrada.
+
+## Por onde começar
+
+Quando houver um arquivo, rode primeiro `bash scripts/diagnosticar.sh <arquivo>`. Ele junta o preflight, a medição de loudness, a checagem de clipping, DC offset e silêncios e a compatibilidade mono, e termina com o que está bom e o que precisa de atenção. Depois use `normalizar.sh` ou `preparar-reels.sh` para corrigir o loudness, e `medir.sh` para conferir.
+
+## preflight.sh
+
+`bash scripts/preflight.sh <arquivo> [saida_planejada]`
+
+- Mostra container, duração, trilhas de áudio (codec, canais, sample rate, bit depth, bitrate) e de vídeo (codec, resolução, fps).
+- Avisa (linhas com `!`) sobre:
+  - arquivo sem áudio;
+  - mais de uma trilha de áudio (os scripts usam só a primeira);
+  - áudio fora de 48 kHz em vídeo;
+  - mono gravado como estéreo, com um canal vazio (comum em gravação com interface de 2 entradas e só um microfone).
+- Com `saida_planejada`, confere se é seguro gravar: saída diferente da entrada, se o arquivo já existe, se a pasta existe e se há espaço em disco (cerca de 2 vezes o tamanho da entrada).
+
+## diagnosticar.sh
+
+`bash scripts/diagnosticar.sh <arquivo> [--alvo <LUFS>] [--silencio <dB> <segundos>]`
+
+Roda, nesta ordem:
+
+1. `preflight.sh`.
+2. `medir.sh`: loudness integrado, LRA, true peak e PLR.
+3. `astats` do ffmpeg: sample peak, nível RMS, DC offset, ocorrências no pico e flat factor.
+4. `silencedetect`: lista os silêncios com início, fim e duração. O padrão é −50 dB por 1 s.
+5. `checar-mono.sh`, se o arquivo for estéreo.
+
+Termina com um resumo "o que está bom / o que precisa de atenção", com uma recomendação para cada problema.
+
+Como interpretar:
+- **Clipping:** detectado quando o pico chega a 0 dBFS com topos achatados (flat factor acima de zero). Um seno ou uma mix que só encosta no pico não conta. Pico acima de 0 dBFS só existe em arquivo de ponto flutuante e vai clipar na conversão.
+- **DC offset:** acima de 0,005 (média do sinal), indica componente contínua ou subsônica. Um HPF a 20 a 30 Hz resolve.
+- **Silêncios:** o diagnóstico indica se cada um está no início, no meio ou no fim. Em vídeo para redes, silêncio no início é problema. Ajuste o limiar com `--silencio` (ex.: `--silencio -40 0.6` para pausas de fala).
+- **`--alvo`:** compara o loudness integrado com o alvo do destino, com tolerância de ±1 LU (ver `referencias/entregas.md`).
 
 ## medir.sh
 
@@ -74,4 +112,4 @@ Depois de rodar, ainda vale o checklist pré-publicação de `referencias/instag
 
 ## Testes
 
-`bash scripts/testes/rodar-testes.sh` gera sinais de teste em `scripts/testes/saida/` (tom de 1 kHz, ruído rosa, estéreo fora de fase, estéreo idêntico, um vídeo curto e um vídeo vertical para Reels) e confere todos os scripts. A pasta `saida/` não vai para o git nem para o ZIP.
+`bash scripts/testes/rodar-testes.sh` gera sinais de teste em `scripts/testes/saida/` (tom de 1 kHz, ruído rosa, estéreo fora de fase, estéreo idêntico, vídeo curto, vídeo vertical para Reels, arquivo clipado, arquivo com silêncio no meio, vídeo com áudio em 44,1 kHz e estéreo com um canal vazio) e confere todos os scripts. A pasta `saida/` não vai para o git nem para o ZIP.

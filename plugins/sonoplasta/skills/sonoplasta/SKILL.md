@@ -23,6 +23,7 @@ Faça no máximo 2 a 3 perguntas objetivas. Se der para ajudar com o que já tem
 ## Passo 2: diagnosticar ou planejar
 
 - Se o usuário tiver um arquivo e for possível rodar comandos, meça com `scripts/medir.sh` antes de opinar sobre loudness, picos ou fase (detalhes em `referencias/scripts.md`). No claude.ai sem acesso ao arquivo ou sem terminal, siga só com orientação.
+- Quando houver um arquivo, rode `scripts/diagnosticar.sh` primeiro: ele junta preflight, loudness, clipping, silêncios e mono num resumo do que está bom e do que precisa de atenção.
 - Siga a cadeia do sinal da fonte até a saída e isole uma variável por vez.
 - Resolva na origem. Prioridade: arranjo e performance → posição do microfone e ambiente → gain staging → edição e limpeza → processamento → equipamento novo (só por último).
 - Em música, verifique primeiro se o problema é de arranjo: dois instrumentos disputando a mesma região e o mesmo registro raramente se resolvem bem com EQ. Considere mudar oitava, voicing, simplificar uma parte, editar a estrutura ou fazer um overdub pontual.
@@ -47,7 +48,7 @@ Leia o arquivo do assunto antes de responder sobre ele:
 - Masterização, CD/vinil → `referencias/masterizacao.md`
 - Medição e checagem → `referencias/medicao.md`
 - Entregas e especificações → `referencias/entregas.md`
-- Scripts de medição e normalização → `referencias/scripts.md`
+- Scripts de diagnóstico, medição e normalização → `referencias/scripts.md`
 - Presets por fonte (voz, violão, bateria, baixo) → `referencias/presets.md`
 - Diagnóstico de problemas (troubleshooting) → `referencias/troubleshooting.md`
 - Frequências por instrumento, mascaramento, o que o celular reproduz → `referencias/frequencias.md`
