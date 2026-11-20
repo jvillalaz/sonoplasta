@@ -106,11 +106,21 @@ loudnorm_duas_passadas() {
     return 1
   fi
 
+  # O loudnorm só aceita measured_I até 0 LUFS. Em sinais muito quentes, baixa 10 dB antes
+  # e desloca as medidas na mesma quantidade (ganho linear muda tudo igual).
+  local pre=""
+  if awk -v i="$in_i" 'BEGIN { exit !(i > -1) }'; then
+    pre="volume=-10dB,"
+    in_i="$(calc "$in_i - 10")"
+    in_tp="$(calc "$in_tp - 10")"
+    in_th="$(calc "$in_th - 10")"
+  fi
+
   # O modo linear só vale se o LRA alvo for maior ou igual ao LRA medido.
   lra_alvo="$(awk -v l="$in_lra" 'BEGIN { x = l + 1; if (x < 7) x = 7; if (x > 50) x = 50; printf "%.1f", x }')"
 
   # Passada 2: aplicar.
-  local filtro="loudnorm=I=${alvo}:TP=${tp}:LRA=${lra_alvo}:measured_I=${in_i}:measured_TP=${in_tp}:measured_LRA=${in_lra}:measured_thresh=${in_th}:offset=${offset}:linear=true:print_format=json"
+  local filtro="${pre}loudnorm=I=${alvo}:TP=${tp}:LRA=${lra_alvo}:measured_I=${in_i}:measured_TP=${in_tp}:measured_LRA=${in_lra}:measured_thresh=${in_th}:offset=${offset}:linear=true:print_format=json"
   local mapa=(-map 0:a:0) ext_saida
   ext_saida="$(printf '%s' "${saida##*.}" | tr '[:upper:]' '[:lower:]')"
   if tem_video "$entrada" && [[ ! "$ext_saida" =~ ^(wav|aif|aiff|flac|mp3|m4a)$ ]]; then
@@ -123,4 +133,29 @@ loudnorm_duas_passadas() {
   }
   tipo="$(printf '%s\n' "$resultado" | campo_json normalization_type)"
   echo "${tipo:-desconhecido} $in_i $in_tp $in_lra $lra_alvo"
+}
+
+# Explica o modo que o loudnorm usou, a partir da saída de loudnorm_duas_passadas.
+# Uso: explicar_modo <tipo> <I medido> <TP medido> <LRA medido> <alvo> <true_peak>
+explicar_modo() {
+  local tipo="$1" in_i="$2" in_tp="$3" in_lra="$4" alvo="$5" tp="$6" pico_previsto
+  if [ "$tipo" = "linear" ]; then
+    echo "Modo linear: só ganho, sem alterar a dinâmica."
+    return
+  fi
+  [ "$tipo" = "dynamic" ] || return 0
+  pico_previsto="$(calc "$in_tp + ($alvo) - ($in_i)")"
+  if awk -v p="$pico_previsto" -v t="$tp" 'BEGIN { exit !(p > t) }'; then
+    cat <<MSG
+Atenção: o loudnorm usou o modo dinâmico (compressão e limitação automáticas), porque só com ganho
+o true peak chegaria a ${pico_previsto} dBTP, acima do máximo de ${tp} dBTP. Para manter o som intacto:
+  - controle os picos antes (limiter ou clipper suave na mix, teto de ${tp} dBTP) e rode de novo, ou
+  - aceite um alvo mais baixo. Ouça o resultado antes de entregar.
+MSG
+  elif awk -v l="$in_lra" 'BEGIN { exit !(l < 0.05) }'; then
+    echo "Modo dinâmico: o sinal não varia de loudness (LRA 0, típico de tons e sinais de teste)."
+    echo "Nesse caso o resultado equivale a um ganho fixo."
+  else
+    echo "Atenção: o loudnorm usou o modo dinâmico (LRA medido: ${in_lra} LU). Ouça o resultado antes de entregar."
+  fi
 }

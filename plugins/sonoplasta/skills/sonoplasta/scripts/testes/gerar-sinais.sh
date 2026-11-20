@@ -27,3 +27,6 @@ gerar estereo-igual.wav   -f lavfi -i "aevalsrc=sin(2*PI*440*t)|sin(2*PI*440*t):
 gerar video-teste.mp4     -f lavfi -i "testsrc=duration=10:size=640x360:rate=30" \
                           -f lavfi -i "anoisesrc=color=pink:duration=10:amplitude=0.2" \
                           -shortest -c:v libx264 -pix_fmt yuv420p -c:a aac
+gerar teste-reels.mp4     -f lavfi -i "testsrc=duration=10:size=1080x1920:rate=30" \
+                          -f lavfi -i "anoisesrc=color=pink:duration=10" \
+                          -shortest -c:v libx264 -c:a aac

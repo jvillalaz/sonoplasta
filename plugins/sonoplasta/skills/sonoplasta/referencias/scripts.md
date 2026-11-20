@@ -60,6 +60,18 @@ Como interpretar a perda na soma mono:
 
 A medição não substitui a escuta: confirme sempre ouvindo em mono e no celular.
 
+## preparar-reels.sh
+
+`bash scripts/preparar-reels.sh <video> [alvo_LUFS=-14] [true_peak=-1.5]`
+
+- Para Reels, TikTok e Shorts. O alvo e o true peak padrão são prática comum, não especificação oficial da Meta.
+- Roda o `checar-mono.sh` no vídeo, normaliza com a mesma lógica do `normalizar.sh` e exporta `<nome>_reels.mp4` com o vídeo copiado (sem recodificar) e o áudio em AAC 320 kbps, 48 kHz.
+- A codificação AAC pode criar picos acima do que saiu da normalização. O script mede o arquivo final e, se passar do true peak, refaz com um teto mais baixo (até duas vezes).
+- Se o vídeo não estiver em H.264, HEVC ou AV1, a saída sai em `.mov` com o vídeo copiado. Se o Instagram recusar, exporte em H.264 no editor e rode de novo.
+- Mostra a medição antes e depois e explica se o `loudnorm` precisou comprimir.
+
+Depois de rodar, ainda vale o checklist pré-publicação de `referencias/instagram-criadores.md`: escuta no celular, legenda e direitos da música.
+
 ## Testes
 
-`bash scripts/testes/rodar-testes.sh` gera sinais de teste em `scripts/testes/saida/` (tom de 1 kHz, ruído rosa, estéreo fora de fase, estéreo idêntico e um vídeo curto) e confere os três scripts. A pasta `saida/` não vai para o git nem para o ZIP.
+`bash scripts/testes/rodar-testes.sh` gera sinais de teste em `scripts/testes/saida/` (tom de 1 kHz, ruído rosa, estéreo fora de fase, estéreo idêntico, um vídeo curto e um vídeo vertical para Reels) e confere todos os scripts. A pasta `saida/` não vai para o git nem para o ZIP.
