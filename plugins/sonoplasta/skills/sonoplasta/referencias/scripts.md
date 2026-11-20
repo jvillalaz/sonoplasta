@@ -70,6 +70,7 @@ Como interpretar:
 - True peak padrão de −1 dBTP. Saída sempre em 48 kHz.
 - **Saída padrão:** `<nome>_<alvo>LUFS.wav` (PCM 24 bits) para áudio e `<nome>_<alvo>LUFS.mov` (vídeo copiado, áudio PCM 24 bits) para vídeo.
 - **Outro formato:** defina a saída pela extensão. `.mp4`/`.m4a` gera AAC 320 kbps, `.mp3` gera 320 kbps, `.flac` e `.aif` também funcionam. Em vídeo, o vídeo é sempre copiado (`-c:v copy`), sem recodificar.
+- Se o true peak final passar do máximo (o limitador do `loudnorm` e a codificação com perdas podem passar 0,1 a 0,2 dB), refaz com um teto interno mais baixo, até duas vezes.
 - Ao final, mede a entrada e a saída e mostra antes e depois.
 
 Como interpretar:
