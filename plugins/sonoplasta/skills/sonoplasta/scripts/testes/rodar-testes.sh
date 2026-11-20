@@ -56,6 +56,13 @@ saida_tom="$("$SCRIPTS/checar-mono.sh" "$SAIDA/tom.wav")"
 [[ "$saida_tom" == *"já é mono"* ]] && ok "tom.wav reconhecido como mono" || falha "tom.wav: $saida_tom"
 
 echo
+echo "preparar-reels.sh"
+"$SCRIPTS/preparar-reels.sh" "$SAIDA/teste-reels.mp4" >/dev/null
+conferir_normalizacao "$SAIDA/teste-reels_reels.mp4" -14 -1.5
+streams="$(ffprobe -v error -show_entries stream=codec_name,sample_rate -of csv=p=0 "$SAIDA/teste-reels_reels.mp4" | tr -d '\r' | tr '\n' ' ')"
+[[ "$streams" == *h264*"aac,48000"* ]] && ok "teste-reels_reels.mp4: vídeo copiado e AAC 48 kHz ($streams)" || falha "streams: $streams"
+
+echo
 if [ "$falhas" -eq 0 ]; then
   echo "Todos os testes passaram."
 else
