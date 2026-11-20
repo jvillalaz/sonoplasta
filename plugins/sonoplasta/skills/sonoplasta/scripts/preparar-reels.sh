@@ -41,6 +41,7 @@ case "$codec_video" in
     ;;
 esac
 
+[ -e "$saida" ] && echo "Aviso: $saida já existe e será sobrescrito." && echo
 echo "== Compatibilidade mono"
 "$DIR/checar-mono.sh" "$entrada" | grep -v '^Arquivo:'
 echo

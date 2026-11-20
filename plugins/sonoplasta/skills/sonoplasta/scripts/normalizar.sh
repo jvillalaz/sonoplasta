@@ -60,6 +60,7 @@ if ! codec="$(args_codec_saida "$saida")"; then
   exit 2
 fi
 
+[ -e "$saida" ] && echo "Aviso: $saida já existe e será sobrescrito."
 echo "Normalizando para ${alvo} LUFS com true peak máximo de ${tp} dBTP (duas passadas)..."
 # shellcheck disable=SC2086
 resultado="$(loudnorm_duas_passadas "$entrada" "$saida" "$alvo" "$tp" $codec)"
