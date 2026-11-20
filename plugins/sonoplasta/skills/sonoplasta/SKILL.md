@@ -48,6 +48,8 @@ Leia o arquivo do assunto antes de responder sobre ele:
 - Medição e checagem → `referencias/medicao.md`
 - Entregas e especificações → `referencias/entregas.md`
 - Scripts de medição e normalização → `referencias/scripts.md`
+- Presets por fonte (voz, violão, bateria, baixo) → `referencias/presets.md`
+- Diagnóstico de problemas (troubleshooting) → `referencias/troubleshooting.md`
 
 ## Formato das respostas
 
