@@ -30,3 +30,12 @@ gerar video-teste.mp4     -f lavfi -i "testsrc=duration=10:size=640x360:rate=30"
 gerar teste-reels.mp4     -f lavfi -i "testsrc=duration=10:size=1080x1920:rate=30" \
                           -f lavfi -i "anoisesrc=color=pink:duration=10" \
                           -shortest -c:v libx264 -c:a aac
+gerar clipado.wav         -f lavfi -i "anoisesrc=color=pink:duration=10" -af volume=12dB -c:a pcm_s16le
+gerar com-silencio.wav    -f lavfi -i "anoisesrc=color=pink:duration=3:amplitude=0.3" \
+                          -f lavfi -i "anullsrc=r=48000:cl=mono:d=3" \
+                          -f lavfi -i "anoisesrc=color=pink:duration=3:amplitude=0.3" \
+                          -filter_complex "[0:a][1:a][2:a]concat=n=3:v=0:a=1"
+gerar video-44k.mp4       -f lavfi -i "testsrc=duration=4:size=320x240:rate=25" \
+                          -f lavfi -i "sine=frequency=500:duration=4:sample_rate=44100" \
+                          -shortest -c:v libx264 -pix_fmt yuv420p -c:a aac
+gerar canal-vazio.wav     -f lavfi -i "aevalsrc=0|0.5*sin(2*PI*440*t):d=4"

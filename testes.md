@@ -169,3 +169,15 @@ Uma boa resposta precisa:
 - Indicar o papelão do bumbo entre 250 e 450 Hz e o ronco do violão entre 150 e 300 Hz.
 - Explicar como achar a frequência exata (boost estreito e varredura).
 - Lembrar que o celular não reproduz o grave fundamental.
+
+## Diagnóstico de arquivos
+
+### 16. Diagnóstico de um vídeo
+
+> (No Claude Code, com um vídeo na pasta) Analisa o áudio desse vídeo antes de eu postar no YouTube.
+
+Uma boa resposta precisa:
+- Rodar `scripts/diagnosticar.sh` (com `--alvo -14`) antes de opinar.
+- Apresentar o resumo do que está bom e do que precisa de atenção, com a recomendação de cada item.
+- Propor a correção com `normalizar.sh`, sem aplicar nada sem o usuário pedir.
+- Lembrar que a medição não substitui a escuta.

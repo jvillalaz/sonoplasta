@@ -62,6 +62,32 @@ conferir_normalizacao "$SAIDA/teste-reels_reels.mp4" -14 -1.5
 streams="$(ffprobe -v error -show_entries stream=codec_name,sample_rate -of csv=p=0 "$SAIDA/teste-reels_reels.mp4" | tr -d '\r' | tr '\n' ' ')"
 [[ "$streams" == *h264*"aac,48000"* ]] && ok "teste-reels_reels.mp4: vídeo copiado e AAC 48 kHz ($streams)" || falha "streams: $streams"
 
+# Confere se a saída de um comando contém um texto esperado.
+espera() {
+  local descricao="$1" texto="$2" saida="$3"
+  [[ "$saida" == *"$texto"* ]] && ok "$descricao" || falha "$descricao (esperado: \"$texto\")"
+}
+nao_espera() {
+  local descricao="$1" texto="$2" saida="$3"
+  [[ "$saida" != *"$texto"* ]] && ok "$descricao" || falha "$descricao (não esperado: \"$texto\")"
+}
+
+echo
+echo "preflight.sh"
+espera "video-44k.mp4 avisa sobre 44,1 kHz em vídeo" "Áudio em 44100 Hz num vídeo" "$("$SCRIPTS/preflight.sh" "$SAIDA/video-44k.mp4")"
+espera "canal-vazio.wav avisa sobre mono gravado em estéreo" "Canal esquerdo vazio" "$("$SCRIPTS/preflight.sh" "$SAIDA/canal-vazio.wav")"
+espera "ruido.wav sem avisos" "Nenhum aviso." "$("$SCRIPTS/preflight.sh" "$SAIDA/ruido.wav")"
+espera "saída igual à entrada é bloqueada" "destruiria o original" "$("$SCRIPTS/preflight.sh" "$SAIDA/tom.wav" "$SAIDA/tom.wav")"
+
+echo
+echo "diagnosticar.sh"
+espera "clipado.wav detecta clipping" "Clipping detectado" "$("$SCRIPTS/diagnosticar.sh" "$SAIDA/clipado.wav")"
+nao_espera "ruido.wav sem clipping" "Clipping detectado" "$("$SCRIPTS/diagnosticar.sh" "$SAIDA/ruido.wav")"
+diag_sil="$("$SCRIPTS/diagnosticar.sh" "$SAIDA/com-silencio.wav")"
+espera "com-silencio.wav lista o silêncio com início e fim" "de 3.00 s a 6.00 s" "$diag_sil"
+espera "fora-de-fase.wav aponta problema na soma mono" "Problema de fase" "$("$SCRIPTS/diagnosticar.sh" "$SAIDA/fora-de-fase.wav")"
+espera "alvo fora de ±1 LU é apontado" "fora do alvo de -16 LUFS" "$("$SCRIPTS/diagnosticar.sh" "$SAIDA/com-silencio.wav" --alvo -16)"
+
 echo
 if [ "$falhas" -eq 0 ]; then
   echo "Todos os testes passaram."

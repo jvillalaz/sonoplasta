@@ -276,3 +276,14 @@ Conflitos entre fontes e a sonoplasta, para a regra da Fase 8 ("se houver confli
 | `referencias/entregas.md` | Níveis Loud/Normal/Quiet do Spotify (−11/−14/−19 LUFS), conferidos na página oficial do Spotify for Artists em 2026-11-19 | claude-video (pista); Spotify (fonte oficial) |
 
 Parâmetros de ducking escritos do zero (nenhuma fonte trouxe valores). Os avisos de licença foram copiados para `plugins/sonoplasta/skills/sonoplasta/LICENCAS-TERCEIROS.md`, que vai junto no ZIP e no plugin.
+
+### Fase 9 (versão 1.7.0)
+
+| Arquivo | O que entrou | Fonte |
+|---|---|---|
+| `scripts/preflight.sh` | Análise com ffprobe (do passo "Pre-Flight" da skill de áudio) e checagem de escrita segura: entrada ≠ saída, arquivo existente e espaço em disco, reescritos do zero em português | claude-video (MIT), ideia |
+| `scripts/normalizar.sh`, `scripts/preparar-reels.sh` | Aviso antes de sobrescrever a saída (no lugar de `-n`, para manter os testes reexecutáveis) | claude-video (MIT), ideia |
+| `scripts/diagnosticar.sh` | Resumo final "bom / atenção" no espírito do checklist de qualidade | travis (MIT), ideia |
+| `referencias/scripts.md` | Nota sobre caminhos no Windows | josiahsiegel (MIT), ideia |
+
+Nenhum código das fontes foi copiado nesta fase. A checagem de consistência de lote (bitwize) ficou para uma versão futura.
