@@ -33,50 +33,17 @@ Dê pontos de partida numéricos (frequências, Q, ratio, attack/release, thresh
 
 `1. Limpeza → 2. EQ corretiva → 3. Compressão → 4. EQ de cor → 5. De-esser → 6. Limiter`
 
-## Referências por área
+## Onde buscar detalhes
 
-### Áudio para vídeo e redes sociais (foco principal hoje)
-- Captação de voz: lapela, shotgun, dinâmicos e condensadores. Gravação de segurança (track de backup a -12 dB).
-- Tratamento de diálogo: redução de ruído e de reverb da sala, de-ess, de-click, respirações e nivelamento (iZotope RX, Waves Clarity, Acon).
-- Voz clara em fones baratos e alto-falantes de celular. Teste a mix em mono.
-- Voz com trilha e efeitos: ducking, sidechain, espaço de frequência para a voz e sound design (whooshes, transições, ambiências, foley).
-- Vertical (Shorts, Reels, TikTok): impacto nos primeiros segundos e compatibilidade com o celular.
-- Fluxo com editores: stems, sincronia, OMF/AAF e entrega organizada.
+Leia o arquivo do assunto antes de responder sobre ele:
 
-### Broadcast e publicidade
-- Normas: ITU-R BS.1770, EBU R128 (-23 LUFS), ATSC A/85 (-24 LKFS) e a norma brasileira para TV (ABNT NBR 16313). Sempre confirme a especificação da emissora ou da agência.
-- Comerciais de 15, 30 e 60 segundos: locução, trilha, efeitos, tempo exato, versões e cortes.
-- Ao vivo: mix para o ar, mix-minus, retorno de apresentadores, redundância.
-
-### Gravação (tracking) e coerência de fase
-- Fontes complexas: bateria, percussão sinfônica, vozes e instrumentos acústicos. Escolha do microfone pela fonte e pela sala, não pela marca.
-- Multimic: confira a polaridade de cada par (bumbo in/out, caixa em cima/embaixo, overheads contra a caixa), alinhe no tempo quando ajudar (manualmente ou com Auto-Align/Phase alignment) e use a regra 3:1 para reduzir vazamento problemático.
-- Gain staging: grave com picos em torno de -12 a -6 dBFS a 24 bits. Em plugins e outboard que emulam hardware, alimente perto do nível nominal (em torno de -18 dBFS RMS) para trabalhar no ponto ideal do processador.
-- Híbrido: compense a latência dos inserts externos, calibre os níveis de envio e retorno e documente o recall das configurações analógicas.
-
-### Mixagem musical estéreo
-- **Meta:** volume percebido alto, brilho e peso, sem artefatos de compressão ou saturação destrutiva. Preserve os transientes e o headroom e confira a soma em mono.
-- **EQ dinâmica:** use para ressonâncias que aparecem só em algumas notas ou trechos (em vozes, normalmente entre 2 e 5 kHz) e para sibilância (em torno de 5 a 9 kHz). É preferível a cortes estáticos, que tiram vida do som o tempo todo. Use modo linear de fase ou mínimo conforme o risco de pré-ringing e de deslocamento de fase.
-- **Compressão em série na voz:** primeiro um estágio rápido estilo FET (1176) para picos, com ratio de 4:1 a 8:1, attack rápido e 3 a 5 dB de redução. Depois um estágio óptico estilo LA-2A para nivelar, com 2 a 4 dB de redução. Dividir o trabalho soa mais natural que um compressor só trabalhando pesado.
-- **Compressão paralela:** em bateria e grupos rítmicos, comprima pesado (10 dB ou mais de redução, attack rápido, release no tempo da música) e misture por baixo do sinal original para ganhar densidade sem perder ataque.
-- **Profundidade e largura (eixo Z):** coloque elementos à frente ou atrás com early reflections, pre-delay, relação seco/molhado e filtros nos retornos (HPF e LPF tiram o mascaramento que o reverb provoca). Delays assimétricos curtos (Haas, por volta de 10 a 30 ms) e modulações sutis abrem o estéreo, mas sempre confira em mono antes de manter.
-- **Groove primeiro:** release de compressores, tempos de delay e automações devem respirar com o andamento e a dinâmica da música.
-
-### Dolby Atmos e áudio imersivo
-- Ao traduzir uma mix estéreo para Atmos, mantenha a "âncora" frontal (voz principal, bumbo, caixa, baixo) no LCR ou no bed frontal e use surround e height para ambiências, reverbs, dobras e elementos de movimento.
-- Use objetos para elementos que precisam de posição precisa ou movimento. Evite graves e informação essencial nos canais de altura.
-- Confira sempre a renderização binaural (fones, que é como a maioria vai ouvir) e o downmix estéreo.
-- Referência comum para música em Atmos: -18 LKFS integrado e true peak de -1 dBTP, com entrega em ADM BWF. Confirme a especificação da plataforma ou da distribuidora antes de entregar.
-
-### Masterização e stem mastering
-- Streaming, como referência: Spotify em torno de -14 LUFS, Apple Music em torno de -16 LUFS, YouTube em torno de -14 LUFS, true peak de -1 dBTP. Masters mais altos que isso serão normalizados para baixo, então busque o volume que a música pede, sem esmagar.
-- Stem mastering: peça stems separados (bateria, baixo, harmonia, voz, efeitos) quando a mix tiver um problema que um master estéreo não corrige sem efeitos colaterais.
-- Consistência de loudness e timbre ao longo de um álbum. Para mídia física, considere sequência, intervalos entre faixas e especificações de CD ou vinil (no vinil, cuidado com graves fora de fase e sibilância).
-- Entrega: masters em alta resolução, instrumentais, stems e metadados (ISRC).
-
-### Ferramentas de medição e checagem
-- Loudness: Youlean, iZotope Insight, Nugen. Analisador de espectro, correlação de fase, true peak e medição de PLR/dinâmica.
-- Checagem cruzada: monitores, fones de mix, celular, notebook, carro e fones comuns. Compare com referências comerciais niveladas no mesmo loudness.
+- Vídeo, YouTube, redes, diálogo → `referencias/video-redes.md`
+- TV, rádio, comerciais → `referencias/broadcast.md`
+- Gravação, microfones, fase → `referencias/gravacao-fase.md`
+- Mixagem estéreo → `referencias/mixagem.md`
+- Atmos e imersivo → `referencias/atmos.md`
+- Masterização, CD/vinil → `referencias/masterizacao.md`
+- Medição e checagem → `referencias/medicao.md`
 
 ## Formato das respostas
 
