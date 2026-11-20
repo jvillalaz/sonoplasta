@@ -134,3 +134,28 @@ loudnorm_duas_passadas() {
   tipo="$(printf '%s\n' "$resultado" | campo_json normalization_type)"
   echo "${tipo:-desconhecido} $in_i $in_tp $in_lra $lra_alvo"
 }
+
+# Explica o modo que o loudnorm usou, a partir da saída de loudnorm_duas_passadas.
+# Uso: explicar_modo <tipo> <I medido> <TP medido> <LRA medido> <alvo> <true_peak>
+explicar_modo() {
+  local tipo="$1" in_i="$2" in_tp="$3" in_lra="$4" alvo="$5" tp="$6" pico_previsto
+  if [ "$tipo" = "linear" ]; then
+    echo "Modo linear: só ganho, sem alterar a dinâmica."
+    return
+  fi
+  [ "$tipo" = "dynamic" ] || return 0
+  pico_previsto="$(calc "$in_tp + ($alvo) - ($in_i)")"
+  if awk -v p="$pico_previsto" -v t="$tp" 'BEGIN { exit !(p > t) }'; then
+    cat <<MSG
+Atenção: o loudnorm usou o modo dinâmico (compressão e limitação automáticas), porque só com ganho
+o true peak chegaria a ${pico_previsto} dBTP, acima do máximo de ${tp} dBTP. Para manter o som intacto:
+  - controle os picos antes (limiter ou clipper suave na mix, teto de ${tp} dBTP) e rode de novo, ou
+  - aceite um alvo mais baixo. Ouça o resultado antes de entregar.
+MSG
+  elif awk -v l="$in_lra" 'BEGIN { exit !(l < 0.05) }'; then
+    echo "Modo dinâmico: o sinal não varia de loudness (LRA 0, típico de tons e sinais de teste)."
+    echo "Nesse caso o resultado equivale a um ganho fixo."
+  else
+    echo "Atenção: o loudnorm usou o modo dinâmico (LRA medido: ${in_lra} LU). Ouça o resultado antes de entregar."
+  fi
+}

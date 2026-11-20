@@ -63,7 +63,7 @@ fi
 echo "Normalizando para ${alvo} LUFS com true peak máximo de ${tp} dBTP (duas passadas)..."
 # shellcheck disable=SC2086
 resultado="$(loudnorm_duas_passadas "$entrada" "$saida" "$alvo" "$tp" $codec)"
-read -r tipo in_i in_tp in_lra lra_alvo <<<"$resultado"
+read -r tipo in_i in_tp in_lra _ <<<"$resultado"
 
 echo
 echo "ANTES"
@@ -73,22 +73,4 @@ echo "DEPOIS"
 echo
 echo "Arquivo gerado: $saida"
 
-if [ "$tipo" = "linear" ]; then
-  echo "Modo linear: só ganho, sem alterar a dinâmica."
-elif [ "$tipo" = "dynamic" ]; then
-  pico_previsto="$(calc "$in_tp + ($alvo) - ($in_i)")"
-  if awk -v p="$pico_previsto" -v t="$tp" 'BEGIN { exit !(p > t) }'; then
-    cat <<EOF
-Atenção: o loudnorm usou o modo dinâmico (compressão e limitação automáticas), porque só com ganho
-o true peak chegaria a ${pico_previsto} dBTP, acima do máximo de ${tp} dBTP. Para manter o som intacto:
-  - controle os picos antes (limiter ou clipper suave na mix) e normalize de novo, ou
-  - aceite um alvo mais baixo. Ouça o resultado antes de entregar.
-EOF
-  elif [ "$in_lra" = "0.00" ] || [ "$in_lra" = "0.0" ] || [ "$in_lra" = "0" ]; then
-    echo "Modo dinâmico: o sinal não varia de loudness (LRA 0, típico de tons e sinais de teste)."
-    echo "Nesse caso o resultado equivale a um ganho fixo."
-  else
-    echo "Atenção: o loudnorm usou o modo dinâmico (LRA medido ${in_lra} LU acima do limite ${lra_alvo} LU)."
-    echo "Ouça o resultado antes de entregar."
-  fi
-fi
+explicar_modo "$tipo" "$in_i" "$in_tp" "$in_lra" "$alvo" "$tp"
