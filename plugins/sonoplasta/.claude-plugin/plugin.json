@@ -1,0 +1,9 @@
+{
+  "name": "sonoplasta",
+  "version": "1.0.0",
+  "description": "Engenheiro de áudio sênior e produtor musical: captação, mixagem estéreo e Dolby Atmos, masterização, loudness e entregas para YouTube, redes sociais, TV, comerciais e discos.",
+  "author": {
+    "name": "Jimmy"
+  },
+  "keywords": ["audio", "mixagem", "masterizacao", "loudness", "youtube", "dolby-atmos"]
+}

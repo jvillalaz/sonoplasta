@@ -1,0 +1,14 @@
+{
+  "name": "sonoplasta",
+  "description": "Skills de áudio para o Claude: engenharia de som, mixagem, masterização e loudness.",
+  "owner": {
+    "name": "Jimmy"
+  },
+  "plugins": [
+    {
+      "name": "sonoplasta",
+      "source": "./plugins/sonoplasta",
+      "description": "Engenheiro de áudio sênior e produtor musical: captação, mixagem estéreo e Dolby Atmos, masterização, loudness e entregas para YouTube, redes sociais, TV, comerciais e discos."
+    }
+  ]
+}
