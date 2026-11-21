@@ -2,6 +2,16 @@
 
 Mudanças de cada versão da skill sonoplasta. O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e as versões seguem o [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [2.0.1] - 2026-11-20
+
+### Adicionado
+- Licença MIT (`LICENSE`) e campo `license` no `plugin.json` e no `marketplace.json`.
+- `homepage` e `repository` no `plugin.json`.
+- Ícone do projeto em `docs/icone.svg`.
+
+### Mudado
+- README reorganizado: cabeçalho com ícone e badges, navegação, exemplos de pergunta e resposta, tour por área, tabela de scripts, seção de versões e licença.
+
 ## [2.0.0] - 2026-11-20
 
 Lançamento que reúne as versões 1.6.0 a 1.9.0, com conhecimento e ideias adaptados de outras skills de áudio de código aberto (ver `FONTES.md`).
