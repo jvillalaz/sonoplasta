@@ -1,6 +1,9 @@
 {
   "name": "sonoplasta",
-  "version": "2.0.0",
+  "version": "2.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/jvillalaz/sonoplasta",
+  "repository": "https://github.com/jvillalaz/sonoplasta",
   "description": "Engenheiro de áudio sênior e produtor musical: captação, voz para vídeo, mixagem estéreo e Dolby Atmos, masterização, loudness, diagnóstico de áudio, limpeza de fala (silêncios e vícios) e entregas para YouTube, Instagram Reels, TikTok, criadores de conteúdo, redes sociais, TV, comerciais e discos.",
   "author": {
     "name": "Jimmy"

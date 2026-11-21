@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t">
+  <title id="t">Sonoplasta: três faders de mesa de som sobre uma onda sonora</title>
+  <defs>
+    <linearGradient id="fundo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16324f"/>
+      <stop offset="1" stop-color="#0b1a2b"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#fundo)"/>
+  <!-- onda sonora ao fundo -->
+  <path d="M14 64 C22 64 24 50 30 50 S38 78 44 78 S52 40 58 40 S66 88 72 88 S80 46 86 46 S94 72 100 72 S108 64 114 64"
+        fill="none" stroke="#2bb3a3" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+  <!-- trilhos dos faders -->
+  <g stroke="#7f93a8" stroke-width="4" stroke-linecap="round">
+    <line x1="40" y1="26" x2="40" y2="102"/>
+    <line x1="64" y1="26" x2="64" y2="102"/>
+    <line x1="88" y1="26" x2="88" y2="102"/>
+  </g>
+  <!-- botões dos faders -->
+  <g>
+    <rect x="29" y="68" width="22" height="12" rx="3" fill="#f2b441"/>
+    <rect x="53" y="38" width="22" height="12" rx="3" fill="#2bb3a3"/>
+    <rect x="77" y="56" width="22" height="12" rx="3" fill="#f2b441"/>
+  </g>
+  <g stroke="#0b1a2b" stroke-width="2" stroke-linecap="round" opacity="0.6">
+    <line x1="34" y1="74" x2="46" y2="74"/>
+    <line x1="58" y1="44" x2="70" y2="44"/>
+    <line x1="82" y1="62" x2="94" y2="62"/>
+  </g>
+</svg>
